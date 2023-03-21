@@ -1,10 +1,14 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
+import { register } from '../../redux/actions/userActions';
 import Metadata from '../layout/Metadata';
 
 const Register = () => {
-  const { values, handleChange } = useInput({
+  const dispatch = useDispatch();
+  // const { loading, error } = useSelector((state) => state.auth);
+  const { values, handleChange, resetValues } = useInput({
     name: '',
     email: '',
     password: '',
@@ -14,7 +18,8 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, email, password, passwordConfirm });
+    dispatch(register({ name, email, password, passwordConfirm }));
+    resetValues();
   };
 
   return (
@@ -96,9 +101,7 @@ const Register = () => {
                       </p>
 
                       <div className='d-flex justify-content-center mx-4 mb-3 mb-lg-4'>
-                        <button
-                          type='submit'
-                          className='btn btn-danger btn-lg'>
+                        <button type='submit' className='btn btn-danger btn-lg'>
                           Register
                         </button>
                       </div>

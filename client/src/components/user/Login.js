@@ -1,10 +1,14 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
+import { login } from '../../redux/actions/userActions';
 import Metadata from '../layout/Metadata';
 
 const Login = () => {
-  const { values, handleChange } = useInput({
+  const dispatch = useDispatch();
+  // const { loading, error } = useSelector((state) => state.auth);
+  const { values, handleChange, resetValues } = useInput({
     name: '',
     email: '',
   });
@@ -12,7 +16,8 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ email, password });
+    dispatch(login({ email, password }));
+    resetValues();
   };
   return (
     <>
