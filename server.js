@@ -8,6 +8,8 @@ import morgan from 'morgan';
 import errorHandlerMiddleware from './middleware/error-handler.js';
 import notFoundMiddleware from './middleware/not-found.js';
 
+import userRouter from './routes/userRoutes.js';
+
 const app = express();
 dotenv.config();
 
@@ -18,6 +20,9 @@ app.use(morgan('dev'));
 app.get('/', (req, res) => {
   res.json({ success: true, message: 'Homepage' });
 });
+
+// router
+app.use('/api/v1', userRouter);
 
 // error middlewares
 app.use(errorHandlerMiddleware);

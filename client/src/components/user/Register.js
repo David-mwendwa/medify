@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
+import Metadata from '../layout/Metadata';
 
 const Register = () => {
   const { values, handleChange } = useInput({
@@ -18,6 +19,7 @@ const Register = () => {
 
   return (
     <>
+      <Metadata title='Register' />
       <div className='container'>
         <div className='row d-flex justify-content-center align-items-center'>
           <div className='col-lg-12 col-xl-11'>

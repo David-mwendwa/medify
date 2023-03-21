@@ -11,6 +11,13 @@ body {
   font-family: 'Cabin', Sans-Serif;
 }
 
+.btn {
+ background: #8EBAF8;
+ outline: none;
+ border-color: #7BB2FD;
+}
+
+
 /* LOADER */
 .lds-spinner {
   width: 120px;
