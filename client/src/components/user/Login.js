@@ -65,9 +65,7 @@ const Login = () => {
                       </p>
 
                       <div className='d-flex justify-content-center mx-4 mb-3 mb-lg-4'>
-                        <button
-                          type='submit'
-                          className='btn btn-primary btn-lg'>
+                        <button type='submit' className='btn btn-danger btn-lg'>
                           Login
                         </button>
                       </div>

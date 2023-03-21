@@ -8,15 +8,22 @@
 
 body {
   background: #f1f1f1;
+  /* background: #AA73AA; */
   font-family: 'Cabin', Sans-Serif;
 }
 
 .btn {
- background: #8EBAF8;
- outline: none;
- border-color: #7BB2FD;
+  background: #8ebaf8;
+  background: #aa73aa;
+  outline: none;
+  border-color: #ceabce;
 }
-
+.btn:hover {
+  background: #ceabce;
+}
+.btn:active {
+  background: #4d334d;
+}
 
 /* LOADER */
 .lds-spinner {
