@@ -5,6 +5,9 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 
+import errorHandlerMiddleware from './middleware/error-handler.js';
+import notFoundMiddleware from './middleware/not-found.js';
+
 const app = express();
 dotenv.config();
 
@@ -15,6 +18,10 @@ app.use(morgan('dev'));
 app.get('/', (req, res) => {
   res.json({ success: true, message: 'Homepage' });
 });
+
+// error middlewares
+app.use(errorHandlerMiddleware);
+app.use(notFoundMiddleware);
 
 // mongo connection
 mongoose
