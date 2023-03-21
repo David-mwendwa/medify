@@ -11,6 +11,7 @@ import {
   USER_LOGOUT_SUCCESS,
   USER_LOGOUT_FAIL,
   CLEAR_ERRORS,
+  USER_RESET,
 } from '../constants/userConstants.js';
 
 export const authReducer = (state = { authUser: {} }, action) => {
@@ -26,7 +27,7 @@ export const authReducer = (state = { authUser: {} }, action) => {
       return { loading: false, authUser: action.payload };
 
     case USER_LOGOUT_SUCCESS:
-      return {};
+      return { loggedout: true };
 
     case USER_LOGIN_FAIL:
     case USER_REGISTER_FAIL:
@@ -36,6 +37,9 @@ export const authReducer = (state = { authUser: {} }, action) => {
 
     case CLEAR_ERRORS:
       return { ...state, error: null };
+
+    case USER_RESET:
+      return { userInfo: {} };
 
     default:
       return state;

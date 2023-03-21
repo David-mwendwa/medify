@@ -1,7 +1,12 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../../redux/actions/userActions';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  // const { loggedout } = useSelector((state) => state.auth);
+
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light border'>
       <Link className='navbar-brand' to='/'>
@@ -45,7 +50,11 @@ const Navbar = () => {
               <Link className='dropdown-item' to='/admin/dashboard'>
                 Dashboard
               </Link>
-              <Link role='button' className='dropdown-item' to=''>
+              <Link
+                role='button'
+                className='dropdown-item'
+                to=''
+                onClick={() => dispatch(logout())}>
                 Logout
               </Link>
             </div>
