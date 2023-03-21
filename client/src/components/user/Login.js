@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
@@ -7,7 +8,7 @@ import Metadata from '../layout/Metadata';
 
 const Login = () => {
   const dispatch = useDispatch();
-  // const { loading, error } = useSelector((state) => state.auth);
+  const { error, authenticated } = useSelector((state) => state.auth);
   const { values, handleChange, resetValues } = useInput({
     name: '',
     email: '',
@@ -19,6 +20,16 @@ const Login = () => {
     dispatch(login({ email, password }));
     resetValues();
   };
+
+  useEffect(() => {
+    if (authenticated) {
+      toast.success('Login successful');
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [authenticated, error]);
+  
   return (
     <>
       <Metadata title='Login' />
