@@ -90,7 +90,6 @@ const getOne = (Model, populateOptions) => async (req, res, next) => {
 /**
  * A function to query and get many documents
  * @param {*} Model mongoose data model
- * @param {*} filterOption(Object) INVALID! additional query options that can be parsed on find method @example {userId: req.user._id}
  * @param {*} filterOption(String) field name to make a search filter from @example name, product, description
  * @returns one or more documents
  */
@@ -103,10 +102,6 @@ const getMany = (Model, filterOption) => async (req, res, next) => {
       filter[[key]] = req.params[key];
     }
   }
-  // INVALID!
-  // if (typeof query === 'object' && !Array.isArray(query) && query !== null) {
-  //   filter = Object.assign(filter, query);
-  // }
   if (typeof query === 'string' || query instanceof String) {
     let searchField = query;
     const keyword = req.query[searchField]
