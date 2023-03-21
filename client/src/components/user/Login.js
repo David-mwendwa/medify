@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
-import { login } from '../../redux/actions/userActions';
+import { login, resetUser } from '../../redux/actions/userActions';
 import Metadata from '../layout/Metadata';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { error, authenticated } = useSelector((state) => state.auth);
   const { values, handleChange, resetValues } = useInput({
     name: '',
@@ -24,12 +25,16 @@ const Login = () => {
   useEffect(() => {
     if (authenticated) {
       toast.success('Login successful');
+      setTimeout(() => {
+        navigate('/');
+        dispatch(resetUser());
+      }, 2000);
     }
     if (error) {
       toast.error(error);
     }
-  }, [authenticated, error]);
-  
+  }, [authenticated, dispatch, error, navigate]);
+
   return (
     <>
       <Metadata title='Login' />

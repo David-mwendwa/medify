@@ -7,7 +7,13 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-const initialState = {};
+const initialState = {
+  auth: {
+    currentUser: localStorage.getItem('authUser')
+      ? JSON.parse(localStorage.getItem('authUser'))
+      : {},
+  },
+};
 
 const middleware = [thunk];
 const store = createStore(
