@@ -31,7 +31,7 @@ const Navbar = () => {
         </button>
         <div className='collapse navbar-collapse' id='navbarNavDropdown'>
           <ul className='navbar-nav ml-auto'>
-            {currentUser?.name ? (
+            {currentUser && currentUser.name ? (
               <div className='dropdown mt-2'>
                 <Link
                   style={{
