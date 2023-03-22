@@ -25,6 +25,17 @@ body {
   background: #4d334d;
 }
 
+/* LANDING PAGE */
+.feature-area {
+  padding: 130px;
+}
+.feature-card {
+  border: 1px solid grey;
+}
+.single-feature {
+  padding: 40px 20px;
+}
+
 /* LOADER */
 .lds-spinner {
   width: 120px;
