@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -31,7 +31,7 @@ const Navbar = () => {
         </button>
         <div className='collapse navbar-collapse' id='navbarNavDropdown'>
           <ul className='navbar-nav ml-auto'>
-            {currentUser && currentUser.name ? (
+            {user && user.name ? (
               <div className='dropdown mt-2'>
                 <Link
                   style={{
@@ -46,12 +46,12 @@ const Navbar = () => {
                   data-toggle='dropdown'
                   aria-haspopup='true'
                   aria-expanded='false'>
-                  {currentUser.name}
+                  {user.name}
                 </Link>
                 <div
                   className='dropdown-menu'
                   aria-labelledby='dropdownMenuButton'>
-                  {currentUser && currentUser.role === 'admin' && (
+                  {user && user.role === 'admin' && (
                     <Link className='dropdown-item' to='/admin/dashboard'>
                       Dashboard
                     </Link>

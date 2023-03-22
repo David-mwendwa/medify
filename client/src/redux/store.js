@@ -9,8 +9,8 @@ const rootReducer = combineReducers({
 
 const initialState = {
   auth: {
-    currentUser: localStorage.getItem('currentUser')
-      ? JSON.parse(localStorage.getItem('currentUser'))
+    user: localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))
       : {},
   },
 };
