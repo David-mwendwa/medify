@@ -1,24 +1,64 @@
+/* eslint-disable no-unused-vars */
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
+import Protected from './components/route/Protected';
+import Public from './components/route/Public';
 import Login from './components/user/Login';
 import Register from './components/user/Register';
+import Dashboard from './components/layout/Dashboard';
 
 function App() {
   return (
     <Router>
       <Toaster position='top-center' reverseOrder={false} />
-      <div>
-        <Navbar />
+      <>
+        <Public>
+          <Navbar />
+        </Public>
         <div className='my-4'>
           <Routes>
-            <Route path='/' element={<Landing />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
+            <Route
+              path='/'
+              element={
+                <Public>
+                  <Landing />
+                </Public>
+              }
+            />
+            <Route
+              path='/register'
+              element={
+                <Public>
+                  <Register />
+                </Public>
+              }
+            />
+            <Route
+              path='/login'
+              element={
+                <Public>
+                  <Login />
+                </Public>
+              }
+            />
           </Routes>
         </div>
-      </div>
+        <div>
+          <Routes>
+            <Route
+              path='/dashboard'
+              element={
+                <Protected>
+                  <Dashboard />
+                </Protected>
+              }
+            />
+          </Routes>
+        </div>
+      </>
     </Router>
   );
 }

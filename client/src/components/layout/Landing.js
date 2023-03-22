@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 const Landing = () => {
   return (
@@ -21,23 +22,24 @@ const Landing = () => {
           </div>
         </div>
       </section>
+
       <section class='feature-area section-padding'>
         <div class='container'>
-          <div class='row'>
-            <div class='feature-card col-lg-3 col-md-6'>
+          <div class='row container'>
+            <div class='feature-card col-lg-3 col-md-6 col-sm-12'>
               <div class='single-feature text-center item-padding'>
                 <img
                   src='https://preview.colorlib.com/theme/medino/assets/images/feature1.png.webp'
                   alt=''
                 />
-                <h3>advance technology</h3>
+                <h3>advanced technology</h3>
                 <p class='pt-3'>
                   Creeping for female light years that lesser can't evening
                   heaven isn't bearing tree appear
                 </p>
               </div>
             </div>
-            <div class='feature-card col-lg-3 col-md-6'>
+            <div class='feature-card col-lg-3 col-md-6 col-sm-12'>
               <div class='single-feature text-center item-padding mt-4 mt-md-0'>
                 <img
                   src='https://preview.colorlib.com/theme/medino/assets/images/feature2.png'
@@ -50,7 +52,7 @@ const Landing = () => {
                 </p>
               </div>
             </div>
-            <div class='feature-card col-lg-3 col-md-6'>
+            <div class='feature-card col-lg-3 col-md-6 col-sm-12'>
               <div class='single-feature text-center item-padding mt-4 mt-lg-0'>
                 <img
                   src='https://preview.colorlib.com/theme/medino/assets/images/feature3.png'
@@ -63,7 +65,7 @@ const Landing = () => {
                 </p>
               </div>
             </div>
-            <div class='feature-card col-lg-3 col-md-6'>
+            <div class='feature-card col-lg-3 col-md-6 col-sm-12'>
               <div class='single-feature text-center item-padding mt-4 mt-lg-0'>
                 <img
                   src='https://preview.colorlib.com/theme/medino/assets/images/feature4.png'
@@ -79,6 +81,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

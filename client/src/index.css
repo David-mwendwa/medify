@@ -27,10 +27,11 @@ body {
 
 /* LANDING PAGE */
 .feature-area {
-  padding: 130px;
+  padding: 100px 0px;
 }
 .feature-card {
   border: 1px solid grey;
+  /* margin: 0 10px; */
 }
 .single-feature {
   padding: 40px 20px;
