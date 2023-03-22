@@ -27,7 +27,7 @@ const Login = () => {
       toast.success('Login successful');
       setTimeout(() => {
         navigate('/');
-        dispatch(resetUser());
+        // dispatch(resetUser());
       }, 2000);
     }
     if (error) {

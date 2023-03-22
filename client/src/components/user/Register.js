@@ -29,7 +29,7 @@ const Register = () => {
       toast.success('Registered successfully');
       setTimeout(() => {
         navigate('/');
-        dispatch(resetUser());
+        // dispatch(resetUser()); // causes inconsistency
       }, 2000);
     }
     if (error) {
