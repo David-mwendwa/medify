@@ -2,62 +2,60 @@
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Landing from './components/layout/Landing';
+import Landing from './components/pages/Landing';
 import Navbar from './components/layout/Navbar';
 import Protected from './components/route/Protected';
 import Public from './components/route/Public';
 import Login from './components/user/Login';
 import Register from './components/user/Register';
-import Dashboard from './components/layout/Dashboard';
+import Dashboard from './components/pages/Dashboard';
 
 function App() {
   return (
     <Router>
       <Toaster position='top-center' reverseOrder={false} />
+      <Public>
+        <Navbar />
+      </Public>
+      <div className=''>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <Public>
+                <Landing />
+              </Public>
+            }
+          />
+          <Route
+            path='/register'
+            element={
+              <Public>
+                <Register />
+              </Public>
+            }
+          />
+          <Route
+            path='/login'
+            element={
+              <Public>
+                <Login />
+              </Public>
+            }
+          />
+        </Routes>
+      </div>
       <>
-        <Public>
-          <Navbar />
-        </Public>
-        <div className='my-4'>
-          <Routes>
-            <Route
-              path='/'
-              element={
-                <Public>
-                  <Landing />
-                </Public>
-              }
-            />
-            <Route
-              path='/register'
-              element={
-                <Public>
-                  <Register />
-                </Public>
-              }
-            />
-            <Route
-              path='/login'
-              element={
-                <Public>
-                  <Login />
-                </Public>
-              }
-            />
-          </Routes>
-        </div>
-        <div>
-          <Routes>
-            <Route
-              path='/dashboard'
-              element={
-                <Protected>
-                  <Dashboard />
-                </Protected>
-              }
-            />
-          </Routes>
-        </div>
+        <Routes>
+          <Route
+            path='/dashboard'
+            element={
+              <Protected>
+                <Dashboard />
+              </Protected>
+            }
+          />
+        </Routes>
       </>
     </Router>
   );

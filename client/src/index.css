@@ -6,6 +6,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cabin&family=Roboto+Condensed:wght@400;700&display=swap');
 
+html,
 body {
   background: #f1f1f1;
   /* background: #AA73AA; */
@@ -35,6 +36,39 @@ body {
 }
 .single-feature {
   padding: 40px 20px;
+}
+
+/* DASHBOARD */
+.main {
+  padding: 20px;
+  height: 100vh;
+}
+.sidebar {
+  background-color: #aa73aa;
+  border-radius: 5px;
+  box-shadow: 0 0 2px grey;
+  margin-right: 20px;
+  min-height: 100%;
+  padding: 10px;
+  width: 300px;
+}
+.content {
+  width: 100%;
+  height: 100%;
+}
+.header {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 2px grey;
+  margin-bottom: 20px;
+  height: 10vh;
+}
+.body {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 2px gray;
+  height: 83vh;
+  width: 100%;
 }
 
 /* LOADER */
