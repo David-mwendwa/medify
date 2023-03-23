@@ -19,30 +19,9 @@ function App() {
       </Public>
       <div className=''>
         <Routes>
-          <Route
-            path='/'
-            element={
-              <Public>
-                <Landing />
-              </Public>
-            }
-          />
-          <Route
-            path='/register'
-            element={
-              <Public>
-                <Register />
-              </Public>
-            }
-          />
-          <Route
-            path='/login'
-            element={
-              <Public>
-                <Login />
-              </Public>
-            }
-          />
+          <Route path='/' element={<Landing />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </div>
       <>

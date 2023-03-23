@@ -14,6 +14,6 @@ const Protected = ({ children }) => {
   if (isAuthorized) {
     return children;
   }
-  return <Navigate to='/dashboard' replace />;
+  return <Navigate to='/' replace />;
 };
 export default Protected;

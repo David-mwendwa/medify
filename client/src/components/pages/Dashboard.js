@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { logout } from '../../redux/actions/userActions';
 
 const userMenu = [
   { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
@@ -11,15 +13,44 @@ const userMenu = [
   },
   { name: 'Book Doctor', path: '/user/book-doctor', icon: 'ri-hospital-line' },
   { name: 'Profile', path: '/user/profile', icon: 'ri-user-3-line' },
-  { name: 'Logout', path: '/user/logout', icon: 'ri-logout-circle-line' },
+];
+
+const adminMenu = [
+  { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
+  { name: 'Users', path: '/admin/users', icon: 'ri-user-3-line' },
+  { name: 'Doctors', path: '/admin/doctors', icon: 'ri-user-star-line' },
+];
+
+const doctorMenu = [
+  { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
+  {
+    name: 'Appointments',
+    path: '/doctor/appointments',
+    icon: 'ri-file-list-3-line',
+  },
+  { name: 'Profile', path: '/user/profile', icon: 'ri-user-3-line' },
 ];
 
 const Dashboard = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isActive = (path) => location.pathname === path;
 
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success('Logout successful');
+    navigate('/');
+  };
+
+  const menuToRender = /admin/i.test(user?.role)
+    ? adminMenu
+    : /doctor/i.test(user?.role)
+    ? doctorMenu
+    : userMenu;
 
   return (
     <div className='main p-2'>
@@ -34,7 +65,7 @@ const Dashboard = () => {
                 onClick={() => setCollapsed(false)}></i>
             )}
             <div className='menu'>
-              {userMenu.map((menu) => (
+              {menuToRender.map((menu) => (
                 <div
                   className={`d-flex menu-item ${
                     isActive(menu.path) ? 'active-menu-item' : ''
@@ -43,6 +74,10 @@ const Dashboard = () => {
                   {!collapsed && <Link to={menu.path}>{menu.name}</Link>}
                 </div>
               ))}
+              <div className='d-flex menu-item' onClick={handleLogout}>
+                <i className='ri-logout-circle-line'></i>
+                <Link to='/user/logout'>Logout</Link>
+              </div>
             </div>
           </div>
         </div>
