@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const userMenu = [
   { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
@@ -14,15 +15,24 @@ const userMenu = [
 ];
 
 const Dashboard = () => {
+  const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <div className='main p-2'>
       <div className='d-flex layout'>
-        <div className='sidebar text-light'>
+        <div className='sidebar'>
           <div className='sidebar-header'>
-            <h1>MEDIFY</h1>
+            {!collapsed ? (
+              <h1>MEDIFY</h1>
+            ) : (
+              <i
+                class='ri-menu-2-line menu-icon'
+                onClick={() => setCollapsed(false)}></i>
+            )}
             <div className='menu'>
               {userMenu.map((menu) => (
                 <div
@@ -30,7 +40,7 @@ const Dashboard = () => {
                     isActive(menu.path) ? 'active-menu-item' : ''
                   }`}>
                   <i className={menu.icon}></i>
-                  <Link to={menu.path}>{menu.name}</Link>
+                  {!collapsed && <Link to={menu.path}>{menu.name}</Link>}
                 </div>
               ))}
             </div>
@@ -38,7 +48,20 @@ const Dashboard = () => {
         </div>
 
         <div className='content'>
-          <div className='header'>Header</div>
+          <div className='header'>
+            {!collapsed ? (
+              <i
+                className='ri-close-fill close-icon'
+                onClick={() => setCollapsed(true)}></i>
+            ) : (
+              <h1 style={{ fontSize: '20px', padding: '10px' }}>MEDIFY</h1>
+            )}
+
+            <div className='d-flex align-items-center px-4'>
+              <i className='ri-notification-2-line layout-action-icon px-3'></i>
+              <Link to='/user/profile'>{user.name}</Link>
+            </div>
+          </div>
           <div className='body'>Body</div>
         </div>
       </div>
