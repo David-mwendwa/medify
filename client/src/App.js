@@ -8,7 +8,7 @@ import Protected from './components/route/Protected';
 import Public from './components/route/Public';
 import Login from './components/user/Login';
 import Register from './components/user/Register';
-import Dashboard from './components/pages/Dashboard';
+import Dashboard from './components/pages/Dashboard_';
 
 function App() {
   return (

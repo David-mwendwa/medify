@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
@@ -38,13 +38,22 @@ const Dashboard = () => {
   const isActive = (path) => location.pathname === path;
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.auth);
+  // console.log({ auth });
+  const { user, loggedout } = auth;
 
   const handleLogout = () => {
     dispatch(logout());
     toast.success('Logout successful');
-    navigate('/');
   };
+
+  // TODO: makes sure this works
+  useEffect(() => {
+    if (loggedout) {
+      console.log({ loggedout });
+      navigate('/');
+    }
+  }, [loggedout, navigate]);
 
   const menuToRender = /admin/i.test(user?.role)
     ? adminMenu
