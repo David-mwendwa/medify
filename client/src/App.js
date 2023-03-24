@@ -8,7 +8,8 @@ import Protected from './components/route/Protected';
 import Public from './components/route/Public';
 import Login from './components/user/Login';
 import Register from './components/user/Register';
-import Dashboard from './components/pages/Dashboard_';
+import Dashboard from './components/pages/Dashboard';
+import ApplyDoctor from './components/pages/ApplyDoctor';
 
 function App() {
   return (
@@ -31,6 +32,14 @@ function App() {
             element={
               <Protected>
                 <Dashboard />
+              </Protected>
+            }
+          />
+          <Route
+            path='/user/apply-doctor'
+            element={
+              <Protected>
+                <ApplyDoctor />
               </Protected>
             }
           />
