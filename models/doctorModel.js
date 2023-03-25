@@ -36,6 +36,7 @@ const doctorSchema = new mongoose.Schema(
     },
     experience: {
       type: String,
+      required: true,
     },
     feePerConsultation: {
       type: Number,
@@ -45,12 +46,8 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    fromTime: {
-      type: String,
-      required: true,
-    },
-    toTime: {
-      type: String,
+    timings: {
+      type: Array,
       required: true,
     },
   },

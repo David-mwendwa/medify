@@ -12,7 +12,11 @@ const userMenu = [
     path: '/user/appointments',
     icon: 'ri-file-list-3-line',
   },
-  { name: 'Book Doctor', path: '/user/book-doctor', icon: 'ri-hospital-line' },
+  {
+    name: 'Apply Doctor',
+    path: '/user/apply-doctor',
+    icon: 'ri-hospital-line',
+  },
   { name: 'Profile', path: '/user/profile', icon: 'ri-user-3-line' },
 ];
 
@@ -108,7 +112,7 @@ const Dashboard = () => {
               <Link to='/user/profile'>{user.name}</Link>
             </div>
           </div>
-          <div className='body'>{/* <ApplyDoctor /> */}</div>
+          <div className='body'>Homepage</div>
         </div>
       </div>
     </div>
