@@ -1,7 +1,12 @@
 import React from 'react';
+import Dashboard from './Dashboard';
 
 const ApplyDoctor = () => {
-  return <div>ApplyDoctor</div>;
+  return (
+    <Dashboard>
+      <h1 className='page-title'>Apply Doctor</h1>
+    </Dashboard>
+  );
 };
 
 export default ApplyDoctor;

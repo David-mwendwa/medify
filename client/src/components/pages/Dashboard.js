@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { logout } from '../../redux/actions/userActions';
+import ApplyDoctor from './ApplyDoctor';
 
 const userMenu = [
   { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
@@ -45,6 +46,7 @@ const Dashboard = () => {
   const handleLogout = () => {
     dispatch(logout());
     toast.success('Logout successful');
+    navigate('/');
   };
 
   // TODO: makes sure this works
@@ -106,7 +108,7 @@ const Dashboard = () => {
               <Link to='/user/profile'>{user.name}</Link>
             </div>
           </div>
-          <div className='body'>Body</div>
+          <div className='body'>{/* <ApplyDoctor /> */}</div>
         </div>
       </div>
     </div>

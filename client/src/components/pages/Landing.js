@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../layout/Footer';
+import Navbar from '../layout/Navbar';
 
 const Landing = () => {
   return (
     <>
+      <Navbar />
       <section className='banner-area'>
         <div className='container'>
           <div className='row'>

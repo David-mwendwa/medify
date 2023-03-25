@@ -15,12 +15,16 @@ function App() {
   return (
     <Router>
       <Toaster position='top-center' reverseOrder={false} />
-      <Public>
-        <Navbar />
-      </Public>
       <div className=''>
         <Routes>
-          <Route path='/' element={<Landing />} />
+          <Route
+            path='/'
+            element={
+              <Public>
+                <Landing />
+              </Public>
+            }
+          />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
         </Routes>
