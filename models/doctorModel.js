@@ -50,10 +50,14 @@ const doctorSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    status: {
+      type: String,
+      default: 'pending',
+    },
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.Schema('Doctor', doctorSchema);
+export default mongoose.model('Doctor', doctorSchema);

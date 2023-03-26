@@ -1,5 +1,6 @@
 import { BadRequestError, NotFoundError } from '../errors/index.js';
 import User from '../models/userModel.js';
+import Doctor from '../models/doctorModel.js';
 import { sendToken } from '../utils/jwt.js';
 
 export const register = async (req, res) => {
@@ -25,4 +26,21 @@ export const login = async (req, res) => {
 export const logout = async (req, res, next) => {
   res.cookie('token', null, { expires: new Date(Date.now()), httpOnly: true });
   res.status(200).json({ success: true, message: 'Logged out' });
+};
+
+export const applyDoctor = async (req, res) => {
+  const newDoctor = await Doctor.create({ ...req.body, status: 'pending' });
+  const adminUser = await User.findOne({ role: 'admin' });
+
+  const unSeenNotifications = adminUser.unSeenNotifications;
+  unSeenNotifications.push({
+    type: 'new-doctor-request',
+    message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for doctor account`,
+    data: {
+      doctorId: newDoctor._id,
+      name: `${newDoctor.firstName} ${newDoctor.lastName}`,
+    },
+    onClickPath: '/admin/doctors',
+  });
+  await User.findByIdAndUpdate(adminUser._id, { unSeenNotifications });
 };
