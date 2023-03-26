@@ -29,7 +29,14 @@ export const logout = async (req, res, next) => {
 };
 
 export const applyDoctor = async (req, res) => {
-  const newDoctor = await Doctor.create({ ...req.body, status: 'pending' });
+  // const user = await User.findById(req.user.id);
+  // TODO: get doctor details from current user data
+  const newDoctor = await Doctor.create({
+    ...req.body,
+    status: 'pending',
+    userId: req.user.id,
+    user: req.user.id,
+  });
   const adminUser = await User.findOne({ role: 'admin' });
 
   const unSeenNotifications = adminUser.unSeenNotifications;

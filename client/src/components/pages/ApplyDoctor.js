@@ -1,11 +1,17 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Col, Row, Input, TimePicker, Button } from 'antd';
 import Dashboard from './Dashboard';
+import { applyDoctor } from '../../redux/actions/userActions';
 
 const ApplyDoctor = () => {
+  const dispatch = useDispatch();
+  const { loading, user, error } = useSelector((state) => state.user);
   const handleSubmit = (values) => {
     console.log('Success', values);
+    dispatch(applyDoctor(values));
   };
+
   return (
     <>
       <h1 className='page-title'>Apply Doctor</h1>
@@ -27,6 +33,11 @@ const ApplyDoctor = () => {
               name='lastName'
               rules={[{ required: true }]}>
               <Input placeholder='Last Name' />
+            </Form.Item>
+          </Col>
+          <Col span={8} xs={24} sm={24} lg={8}>
+            <Form.Item label='Email' name='email' rules={[{ required: true }]}>
+              <Input placeholder='Email' type='email' />
             </Form.Item>
           </Col>
           <Col span={8} xs={24} sm={24} lg={8}>
@@ -91,7 +102,9 @@ const ApplyDoctor = () => {
           </Col>
         </Row>
         <div className='d-flex justify-content-end'>
-          <Button className='primary-button' htmlType='submit'>SUBMIT</Button>
+          <Button className='primary-button' htmlType='submit'>
+            SUBMIT
+          </Button>
         </div>
       </Form>
     </>

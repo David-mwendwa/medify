@@ -10,6 +10,9 @@ import {
   USER_PROFILE_FAIL,
   USER_LOGOUT_SUCCESS,
   USER_LOGOUT_FAIL,
+  USER_APPLY_DOCTOR_FAIL,
+  USER_APPLY_DOCTOR_REQUEST,
+  USER_APPLY_DOCTOR_SUCCESS,
   CLEAR_ERRORS,
   USER_RESET,
 } from '../constants/userConstants.js';
@@ -48,6 +51,19 @@ export const authReducer = (state = { user: {} }, action) => {
     case USER_RESET:
       return { authenticated: false };
 
+    default:
+      return state;
+  }
+};
+
+export const userReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case USER_APPLY_DOCTOR_REQUEST:
+      return { loading: true };
+    case USER_APPLY_DOCTOR_SUCCESS:
+      return { loading: false, success: true, user: action.payload };
+    case USER_APPLY_DOCTOR_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

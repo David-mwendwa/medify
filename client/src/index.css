@@ -122,7 +122,8 @@ body {
   font-weight: bold;
   color: rgba(0, 0, 0, 0.627);
 }
-.ant-picker, input {
+.ant-picker,
+input {
   height: 40px !important;
 }
 input:focus {
@@ -138,6 +139,10 @@ input:focus {
   width: 100%;
   font-size: 10px;
   width: max-content;
+}
+.ant-scroll-number-only-unit {
+  padding-right: -10px !important;
+  padding-bottom: -10px !important;
 }
 @media screen and (max-width: 768) {
   .menu {

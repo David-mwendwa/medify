@@ -18,7 +18,7 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    emal: {
+    email: {
       type: String,
       required: true,
     },
@@ -42,10 +42,10 @@ const doctorSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    consulationHours: {
-      type: String,
-      required: true,
-    },
+    // consultationHours: {
+    //   type: String,
+    //   required: true,
+    // },
     timings: {
       type: Array,
       required: true,

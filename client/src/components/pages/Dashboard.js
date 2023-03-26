@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Badge } from 'antd';
 import toast from 'react-hot-toast';
 import { logout } from '../../redux/actions/userActions';
 import ApplyDoctor from './ApplyDoctor';
@@ -108,8 +109,15 @@ const Dashboard = () => {
             )}
 
             <div className='d-flex align-items-center px-4'>
-              <i className='ri-notification-2-line layout-action-icon px-3'></i>
-              <Link to='/user/profile'>{user.name}</Link>
+              {user?.unSeenNotifications.length && (
+                <Badge count={user?.unSeenNotifications.length}>
+                  <i className='ri-notification-2-line layout-action-icon px-3'></i>
+                </Badge>
+              )}
+
+              <Link to='/user/profile' className='anchor mx-3'>
+                {user.name}
+              </Link>
             </div>
           </div>
           <div className='body'>Homepage</div>

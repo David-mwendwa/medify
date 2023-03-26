@@ -8,6 +8,9 @@ import {
   USER_REGISTER_SUCCESS,
   USER_LOGOUT_SUCCESS,
   USER_LOGOUT_FAIL,
+  USER_APPLY_DOCTOR_FAIL,
+  USER_APPLY_DOCTOR_REQUEST,
+  USER_APPLY_DOCTOR_SUCCESS,
   USER_RESET,
   CLEAR_ERRORS,
 } from '../constants/userConstants';
@@ -41,6 +44,23 @@ export const login = (user) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const applyDoctor = (details) => async (dispatch) => {
+  dispatch({ type: USER_APPLY_DOCTOR_REQUEST });
+
+  try {
+    const { data } = await axios.post('/api/v1/user/apply-doctor', details);
+    dispatch({ type: USER_APPLY_DOCTOR_SUCCESS, payload: data.user });
+  } catch (error) {
+    dispatch({
+      type: USER_APPLY_DOCTOR_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
