@@ -11,6 +11,12 @@ import {
   USER_APPLY_DOCTOR_FAIL,
   USER_APPLY_DOCTOR_REQUEST,
   USER_APPLY_DOCTOR_SUCCESS,
+  CLEAR_NOTIFICATIONS_FAIL,
+  CLEAR_NOTIFICATIONS_REQUEST,
+  CLEAR_NOTIFICATIONS_SUCCESS,
+  MARK_ALL_NOTIFICATIONS_AS_SEEN_FAIL,
+  MARK_ALL_NOTIFICATIONS_AS_SEEN_REQUEST,
+  MARK_ALL_NOTIFICATIONS_AS_SEEN_SUCCESS,
   USER_RESET,
   CLEAR_ERRORS,
 } from '../constants/userConstants';
@@ -61,6 +67,50 @@ export const applyDoctor = (details) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_APPLY_DOCTOR_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const clearNotifications = (userId) => async (dispatch) => {
+  dispatch({ type: CLEAR_NOTIFICATIONS_REQUEST });
+
+  try {
+    const { data } = await axios.post('/api/v1/user/clear-notifications', {
+      userId,
+    });
+    dispatch({ type: CLEAR_NOTIFICATIONS_SUCCESS, payload: data.user });
+  } catch (error) {
+    dispatch({
+      type: CLEAR_NOTIFICATIONS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const markAsSeen = (userId) => async (dispatch) => {
+  dispatch({ type: MARK_ALL_NOTIFICATIONS_AS_SEEN_REQUEST });
+
+  try {
+    const { data } = await axios.post(
+      '/api/v1/user/mark-all-notifications-as-seen',
+      {
+        userId,
+      }
+    );
+    dispatch({
+      type: MARK_ALL_NOTIFICATIONS_AS_SEEN_SUCCESS,
+      payload: data.user,
+    });
+  } catch (error) {
+    dispatch({
+      type: MARK_ALL_NOTIFICATIONS_AS_SEEN_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

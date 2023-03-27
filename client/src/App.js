@@ -11,6 +11,8 @@ import Register from './components/user/Register';
 import Dashboard from './components/pages/Dashboard';
 import ApplyDoctor from './components/pages/ApplyDoctor';
 import Notifications from './components/pages/Notifications';
+import Appointments from './components/pages/Appointments';
+import Profile from './components/pages/Profile';
 
 function App() {
   return (
@@ -53,6 +55,22 @@ function App() {
             element={
               <Protected>
                 <Notifications />
+              </Protected>
+            }
+          />
+          <Route
+            path='/user/appointments'
+            element={
+              <Protected>
+                <Appointments />
+              </Protected>
+            }
+          />
+          <Route
+            path='/user/profile'
+            element={
+              <Protected>
+                <Profile />
               </Protected>
             }
           />
