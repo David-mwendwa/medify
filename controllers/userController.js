@@ -51,3 +51,20 @@ export const applyDoctor = async (req, res) => {
   });
   await User.findByIdAndUpdate(adminUser._id, { unSeenNotifications });
 };
+
+export const markAllAsSeen = async (req, res) => {
+  const user = await User.findOne({ _id: req.user.id });
+  const unSeenNotifications = user.unSeenNotifications;
+  user.seenNotifications = unSeenNotifications;
+  user.unSeenNotifications = [];
+  await User.findByIdAndUpdate(user._id, user);
+  res.status(200).json({ success: true, message: 'notifications seen' });
+};
+
+export const clearAllNotifications = async (req, res) => {
+  const user = await User.findOne({ _id: req.user.id });
+  user.seenNotifications = [];
+  user.unSeenNotifications = [];
+  await User.findByIdAndUpdate(user._id, user);
+  res.status(200).json({ success: true, message: 'notifications cleared' });
+};

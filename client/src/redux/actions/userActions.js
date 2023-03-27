@@ -79,7 +79,7 @@ export const clearNotifications = (userId) => async (dispatch) => {
   dispatch({ type: CLEAR_NOTIFICATIONS_REQUEST });
 
   try {
-    const { data } = await axios.post('/api/v1/user/clear-notifications', {
+    const { data } = await axios.post('/api/v1/user/delete-all-notifications', {
       userId,
     });
     dispatch({ type: CLEAR_NOTIFICATIONS_SUCCESS, payload: data.user });
