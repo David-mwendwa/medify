@@ -13,6 +13,8 @@ import ApplyDoctor from './components/pages/ApplyDoctor';
 import Notifications from './components/pages/Notifications';
 import Appointments from './components/pages/Appointments';
 import Profile from './components/pages/Profile';
+import UsersList from './components/admin/UsersList';
+import DoctorsList from './components/admin/DoctorsList';
 
 function App() {
   return (
@@ -71,6 +73,22 @@ function App() {
             element={
               <Protected>
                 <Profile />
+              </Protected>
+            }
+          />
+          <Route
+            path='/admin/users'
+            element={
+              <Protected>
+                <UsersList />
+              </Protected>
+            }
+          />
+          <Route
+            path='/admin/doctors'
+            element={
+              <Protected>
+                <DoctorsList />
               </Protected>
             }
           />

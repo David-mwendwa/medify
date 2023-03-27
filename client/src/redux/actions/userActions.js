@@ -19,6 +19,18 @@ import {
   MARK_ALL_NOTIFICATIONS_AS_SEEN_SUCCESS,
   USER_RESET,
   CLEAR_ERRORS,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL,
+  USERS_REQUEST,
+  USERS_SUCCESS,
+  USERS_FAIL,
 } from '../constants/userConstants';
 
 export const register = (user) => async (dispatch) => {
@@ -141,4 +153,83 @@ export const resetUser = () => async (dispatch) => {
 
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
+};
+
+/******************( ADMIN ACTIONS )******************/
+
+/**
+ * Get many users
+ * @param {*} null
+ * @returns request user documents - one or more
+ */
+export const getUsers = () => async (dispatch) => {
+  dispatch({ type: USERS_REQUEST });
+
+  try {
+    const { data } = await axios.get('/api/v1/admin/users');
+    dispatch({ type: USERS_SUCCESS, payload: data.data });
+  } catch (error) {
+    dispatch({
+      type: USERS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+/**
+ * Get single user
+ * @param {*} id id of the user request
+ * @returns reuested user document - object
+ */
+export const getUser = (id) => async (dispatch) => {
+  dispatch({ type: USER_DETAILS_REQUEST });
+
+  try {
+    const { data } = await axios.get(`/api/v1/admin/users/${id}`);
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data.user });
+  } catch (error) {
+    dispatch({
+      type: USER_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+/**
+ * Update user
+ * @param {*} id id of the user to update
+ * @param {*} newDetails new user details object
+ * @returns update status
+ */
+export const updateUser = (id, newDetails) => async (dispatch) => {
+  dispatch({ type: USER_UPDATE_REQUEST });
+
+  try {
+    await axios.patch(`/api/v1/admin/users/${id}`, newDetails);
+    dispatch({ type: USER_UPDATE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+/**
+ * Delete user
+ * @param {*} id id of the user to delete
+ * @returns delete status
+ */
+export const deleteUser = (id) => async (dispatch) => {
+  dispatch({ type: USER_DELETE_REQUEST });
+
+  try {
+    await axios.delete(`/api/v1/admin/users/${id}`);
+    dispatch({ type: USER_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
 };

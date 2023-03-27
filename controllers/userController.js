@@ -2,6 +2,7 @@ import { BadRequestError, NotFoundError } from '../errors/index.js';
 import User from '../models/userModel.js';
 import Doctor from '../models/doctorModel.js';
 import { sendToken } from '../utils/jwt.js';
+import { deleteOne, getMany, getOne, updateOne } from '../utils/handleAPI.js';
 
 export const register = async (req, res) => {
   const { name, email, password, passwordConfirm } = req.body;
@@ -68,3 +69,19 @@ export const clearAllNotifications = async (req, res) => {
   await User.findByIdAndUpdate(user._id, user);
   res.status(200).json({ success: true, message: 'notifications cleared' });
 };
+
+export const getUsers = getMany(User);
+
+export const getUser = getOne(User);
+
+export const updateUser = updateOne(User);
+
+export const deleteUser = deleteOne(User);
+
+export const getDoctors = getMany(Doctor);
+
+export const getDoctor = getOne(Doctor);
+
+export const updateDoctor = updateOne(Doctor);
+
+export const deleteDoctor = deleteOne(Doctor);

@@ -2,12 +2,19 @@ import express from 'express';
 import {
   applyDoctor,
   clearAllNotifications,
+  deleteDoctor,
+  deleteUser,
+  getDoctor,
+  getUser,
+  getUsers,
   login,
   logout,
   markAllAsSeen,
   register,
+  updateDoctor,
+  updateUser,
 } from '../controllers/userController.js';
-import { protect } from '../middleware/auth.js';
+import { authorizeRoles, protect } from '../middleware/auth.js';
 const router = express.Router();
 
 router.route('/user/register').post(register);
@@ -21,5 +28,19 @@ router
 router
   .route('/user/delete-all-notifications')
   .post(protect, clearAllNotifications);
+
+router.route('/admin/users').get(protect, authorizeRoles('admin'), getUsers);
+router
+  .route('/admin/users/:id')
+  .get(protect, authorizeRoles('admin'), getUser)
+  .patch(protect, authorizeRoles('admin'), updateUser)
+  .delete(protect, authorizeRoles('admin'), deleteUser);
+
+router.route('/admin/doctors').get(protect, authorizeRoles('admin'));
+router
+  .route('/admin/doctors/:id')
+  .get(protect, authorizeRoles('admin'), getDoctor)
+  .patch(protect, authorizeRoles('admin'), updateDoctor)
+  .delete(protect, authorizeRoles('admin'), deleteDoctor);
 
 export default router;

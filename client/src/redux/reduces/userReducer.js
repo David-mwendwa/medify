@@ -13,6 +13,9 @@ import {
   USER_APPLY_DOCTOR_FAIL,
   USER_APPLY_DOCTOR_REQUEST,
   USER_APPLY_DOCTOR_SUCCESS,
+  USERS_FAIL,
+  USERS_REQUEST,
+  USERS_SUCCESS,
   CLEAR_ERRORS,
   USER_RESET,
 } from '../constants/userConstants.js';
@@ -63,6 +66,19 @@ export const userReducer = (state = { user: {} }, action) => {
     case USER_APPLY_DOCTOR_SUCCESS:
       return { loading: false, success: true, user: action.payload };
     case USER_APPLY_DOCTOR_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const usersReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case USERS_REQUEST:
+      return { loading: true };
+    case USERS_SUCCESS:
+      return { loading: false, success: true, users: action.payload };
+    case USERS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
