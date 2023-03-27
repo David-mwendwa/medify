@@ -37,7 +37,7 @@ const doctorMenu = [
   { name: 'Profile', path: '/user/profile', icon: 'ri-user-3-line' },
 ];
 
-const Dashboard = () => {
+const Dashboard = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -109,18 +109,18 @@ const Dashboard = () => {
             )}
 
             <div className='d-flex align-items-center px-4'>
-              {user?.unSeenNotifications.length && (
-                <Badge count={user?.unSeenNotifications.length}>
-                  <i className='ri-notification-2-line layout-action-icon px-3'></i>
-                </Badge>
-              )}
+              <Badge
+                count={user?.unSeenNotifications.length}
+                onClick={() => navigate('/user/notifications')}>
+                <i className='ri-notification-2-line layout-action-icon px-3'></i>
+              </Badge>
 
               <Link to='/user/profile' className='anchor mx-3'>
                 {user.name}
               </Link>
             </div>
           </div>
-          <div className='body'>Homepage</div>
+          <div className='body'>{children}</div>
         </div>
       </div>
     </div>

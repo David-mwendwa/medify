@@ -13,7 +13,7 @@ const ApplyDoctor = () => {
   };
 
   return (
-    <>
+    <Dashboard>
       <h1 className='page-title'>Apply Doctor</h1>
       <hr />
       <Form layout='vertical' onFinish={handleSubmit}>
@@ -107,7 +107,7 @@ const ApplyDoctor = () => {
           </Button>
         </div>
       </Form>
-    </>
+    </Dashboard>
   );
 };
 

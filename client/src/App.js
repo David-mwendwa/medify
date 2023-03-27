@@ -10,6 +10,7 @@ import Login from './components/user/Login';
 import Register from './components/user/Register';
 import Dashboard from './components/pages/Dashboard';
 import ApplyDoctor from './components/pages/ApplyDoctor';
+import Notifications from './components/pages/Notifications';
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
             element={
               <Protected>
                 <ApplyDoctor />
+              </Protected>
+            }
+          />
+          <Route
+            path='/user/notifications'
+            element={
+              <Protected>
+                <Notifications />
               </Protected>
             }
           />
