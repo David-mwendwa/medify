@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Col, Row, Input, TimePicker, Button } from 'antd';
 import Dashboard from './Dashboard';
 import { applyDoctor } from '../../redux/actions/userActions';
+import { toast } from 'react-hot-toast';
 
 const ApplyDoctor = () => {
   const dispatch = useDispatch();
   const { loading, user, error } = useSelector((state) => state.user);
   const handleSubmit = (values) => {
-    console.log('Success', values);
     dispatch(applyDoctor(values));
+    toast.success('Doctor application submitted');
   };
 
   return (

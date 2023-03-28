@@ -276,6 +276,7 @@ export const getDoctor = (id) => async (dispatch) => {
 };
 
 export const updateDoctor = (id, newDetails) => async (dispatch) => {
+  console.log({ id, newDetails });
   dispatch({ type: DOCTOR_UPDATE_REQUEST });
 
   try {

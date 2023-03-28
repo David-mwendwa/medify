@@ -5,6 +5,7 @@ import {
   deleteDoctor,
   deleteUser,
   getDoctor,
+  getDoctors,
   getUser,
   getUsers,
   login,
@@ -36,7 +37,9 @@ router
   .patch(protect, authorizeRoles('admin'), updateUser)
   .delete(protect, authorizeRoles('admin'), deleteUser);
 
-router.route('/admin/doctors').get(protect, authorizeRoles('admin'));
+router
+  .route('/admin/doctors')
+  .get(protect, authorizeRoles('admin'), getDoctors);
 router
   .route('/admin/doctors/:id')
   .get(protect, authorizeRoles('admin'), getDoctor)
