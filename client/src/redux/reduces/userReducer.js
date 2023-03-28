@@ -13,11 +13,32 @@ import {
   USER_APPLY_DOCTOR_FAIL,
   USER_APPLY_DOCTOR_REQUEST,
   USER_APPLY_DOCTOR_SUCCESS,
-  USERS_FAIL,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL,
   USERS_REQUEST,
   USERS_SUCCESS,
+  USERS_FAIL,
   CLEAR_ERRORS,
   USER_RESET,
+  DOCTOR_UPDATE_REQUEST,
+  DOCTOR_UPDATE_SUCCESS,
+  DOCTOR_UPDATE_FAIL,
+  DOCTOR_DELETE_REQUEST,
+  DOCTOR_DELETE_SUCCESS,
+  DOCTOR_DELETE_FAIL,
+  DOCTOR_DETAILS_REQUEST,
+  DOCTOR_DETAILS_SUCCESS,
+  DOCTOR_DETAILS_FAIL,
+  DOCTORS_REQUEST,
+  DOCTORS_SUCCESS,
+  DOCTORS_FAIL,
 } from '../constants/userConstants.js';
 
 export const authReducer = (state = { user: {} }, action) => {
@@ -62,10 +83,19 @@ export const authReducer = (state = { user: {} }, action) => {
 export const userReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_APPLY_DOCTOR_REQUEST:
+    case USER_DETAILS_REQUEST:
+    case USER_UPDATE_REQUEST:
+    case USER_DELETE_REQUEST:
       return { loading: true };
     case USER_APPLY_DOCTOR_SUCCESS:
+    case USER_DETAILS_SUCCESS:
+    case USER_UPDATE_SUCCESS:
+    case USER_DELETE_SUCCESS:
       return { loading: false, success: true, user: action.payload };
     case USER_APPLY_DOCTOR_FAIL:
+    case USER_DETAILS_FAIL:
+    case USER_UPDATE_FAIL:
+    case USER_DELETE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -79,6 +109,38 @@ export const usersReducer = (state = { users: [] }, action) => {
     case USERS_SUCCESS:
       return { loading: false, success: true, users: action.payload };
     case USERS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const doctorReducer = (state = { doctor: {} }, action) => {
+  switch (action.type) {
+    case DOCTOR_DETAILS_REQUEST:
+    case DOCTOR_UPDATE_REQUEST:
+    case DOCTOR_DELETE_REQUEST:
+      return { loading: true };
+    case DOCTOR_DETAILS_SUCCESS:
+    case DOCTOR_UPDATE_SUCCESS:
+    case DOCTOR_DELETE_SUCCESS:
+      return { loading: false, success: true, doctor: action.payload };
+    case DOCTOR_DETAILS_FAIL:
+    case DOCTOR_UPDATE_FAIL:
+    case DOCTOR_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const doctorsReducer = (state = { doctors: [] }, action) => {
+  switch (action.type) {
+    case DOCTORS_REQUEST:
+      return { loading: true };
+    case DOCTORS_SUCCESS:
+      return { loading: false, success: true, doctors: action.payload };
+    case DOCTORS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

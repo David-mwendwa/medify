@@ -31,6 +31,18 @@ import {
   USERS_REQUEST,
   USERS_SUCCESS,
   USERS_FAIL,
+  DOCTOR_UPDATE_REQUEST,
+  DOCTOR_UPDATE_SUCCESS,
+  DOCTOR_UPDATE_FAIL,
+  DOCTOR_DELETE_REQUEST,
+  DOCTOR_DELETE_SUCCESS,
+  DOCTOR_DELETE_FAIL,
+  DOCTOR_DETAILS_REQUEST,
+  DOCTOR_DETAILS_SUCCESS,
+  DOCTOR_DETAILS_FAIL,
+  DOCTORS_REQUEST,
+  DOCTORS_SUCCESS,
+  DOCTORS_FAIL,
 } from '../constants/userConstants';
 
 export const register = (user) => async (dispatch) => {
@@ -186,7 +198,7 @@ export const getUser = (id) => async (dispatch) => {
 
   try {
     const { data } = await axios.get(`/api/v1/admin/users/${id}`);
-    dispatch({ type: USER_DETAILS_SUCCESS, payload: data.user });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data.data });
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
@@ -229,6 +241,63 @@ export const deleteUser = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+/******* DOCTOR ACTIONS **************/
+export const getDoctors = () => async (dispatch) => {
+  dispatch({ type: DOCTORS_REQUEST });
+
+  try {
+    const { data } = await axios.get('/api/v1/admin/doctors');
+    dispatch({ type: DOCTORS_SUCCESS, payload: data.data });
+  } catch (error) {
+    dispatch({
+      type: DOCTORS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getDoctor = (id) => async (dispatch) => {
+  dispatch({ type: DOCTOR_DETAILS_REQUEST });
+
+  try {
+    const { data } = await axios.get(`/api/v1/admin/doctors/${id}`);
+    dispatch({ type: DOCTOR_DETAILS_SUCCESS, payload: data.data });
+  } catch (error) {
+    dispatch({
+      type: DOCTOR_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const updateDoctor = (id, newDetails) => async (dispatch) => {
+  dispatch({ type: DOCTOR_UPDATE_REQUEST });
+
+  try {
+    await axios.patch(`/api/v1/admin/doctors/${id}`, newDetails);
+    dispatch({ type: DOCTOR_UPDATE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: DOCTOR_UPDATE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const deleteDoctor = (id) => async (dispatch) => {
+  dispatch({ type: DOCTOR_DELETE_REQUEST });
+
+  try {
+    await axios.delete(`/api/v1/admin/doctors/${id}`);
+    dispatch({ type: DOCTOR_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: DOCTOR_DELETE_FAIL,
       payload: error.response.data.message,
     });
   }
