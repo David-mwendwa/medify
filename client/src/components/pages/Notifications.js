@@ -8,6 +8,7 @@ import {
   login,
   markAsSeen,
 } from '../../redux/actions/userActions';
+import { toast } from 'react-hot-toast';
 
 const Notifications = () => {
   const { user } = useSelector((state) => state.auth);
@@ -17,10 +18,12 @@ const Notifications = () => {
   //TODO: make sure after clearing or deleting the notifications, the current user details reloads
   const markAllAsSeen = async () => {
     dispatch(markAsSeen());
+    toast.success('notifications marked as seen');
   };
 
   const clearAllNotifications = async () => {
     dispatch(clearNotifications());
+    toast.success('notifications deleted!');
   };
 
   return (
