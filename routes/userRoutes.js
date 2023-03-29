@@ -2,17 +2,13 @@ import express from 'express';
 import {
   applyDoctor,
   clearAllNotifications,
-  deleteDoctor,
   deleteUser,
-  getDoctor,
-  getDoctors,
   getUser,
   getUsers,
   login,
   logout,
   markAllAsSeen,
   register,
-  updateDoctor,
   updateUser,
 } from '../controllers/userController.js';
 import { authorizeRoles, protect } from '../middleware/auth.js';
@@ -36,14 +32,5 @@ router
   .get(protect, authorizeRoles('admin'), getUser)
   .patch(protect, authorizeRoles('admin'), updateUser)
   .delete(protect, authorizeRoles('admin'), deleteUser);
-
-router
-  .route('/admin/doctors')
-  .get(protect, authorizeRoles('admin'), getDoctors);
-router
-  .route('/admin/doctors/:id')
-  .get(protect, authorizeRoles('admin'), getDoctor)
-  .patch(protect, authorizeRoles('admin'), updateDoctor)
-  .delete(protect, authorizeRoles('admin'), deleteDoctor);
 
 export default router;

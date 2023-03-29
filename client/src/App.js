@@ -12,9 +12,9 @@ import Dashboard from './components/pages/Dashboard';
 import ApplyDoctor from './components/pages/ApplyDoctor';
 import Notifications from './components/pages/Notifications';
 import Appointments from './components/pages/Appointments';
-import Profile from './components/pages/Profile';
-import UsersList from './components/admin/UsersList';
-import DoctorsList from './components/admin/DoctorsList';
+import UsersList from './components/pages/admin/UsersList';
+import DoctorsList from './components/pages/admin/DoctorsList';
+import Profile from './components/pages/doctor/Profile';
 
 function App() {
   return (
@@ -89,6 +89,14 @@ function App() {
             element={
               <Protected>
                 <DoctorsList />
+              </Protected>
+            }
+          />
+          <Route
+            path='/doctor/profile/:userId'
+            element={
+              <Protected>
+                <Profile />
               </Protected>
             }
           />

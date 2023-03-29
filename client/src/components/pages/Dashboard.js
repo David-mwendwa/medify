@@ -6,36 +6,7 @@ import toast from 'react-hot-toast';
 import { logout } from '../../redux/actions/userActions';
 import ApplyDoctor from './ApplyDoctor';
 
-const userMenu = [
-  { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
-  {
-    name: 'Appontements',
-    path: '/user/appointments',
-    icon: 'ri-file-list-3-line',
-  },
-  {
-    name: 'Apply Doctor',
-    path: '/user/apply-doctor',
-    icon: 'ri-hospital-line',
-  },
-  { name: 'Profile', path: '/user/profile', icon: 'ri-user-3-line' },
-];
 
-const adminMenu = [
-  { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
-  { name: 'Users', path: '/admin/users', icon: 'ri-user-3-line' },
-  { name: 'Doctors', path: '/admin/doctors', icon: 'ri-user-star-line' },
-];
-
-const doctorMenu = [
-  { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
-  {
-    name: 'Appointments',
-    path: '/doctor/appointments',
-    icon: 'ri-file-list-3-line',
-  },
-  { name: 'Profile', path: '/user/profile', icon: 'ri-user-3-line' },
-];
 
 const Dashboard = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -61,6 +32,41 @@ const Dashboard = ({ children }) => {
       navigate('/');
     }
   }, [loggedout, navigate]);
+
+  const userMenu = [
+    { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
+    {
+      name: 'Appontements',
+      path: '/user/appointments',
+      icon: 'ri-file-list-3-line',
+    },
+    {
+      name: 'Apply Doctor',
+      path: '/user/apply-doctor',
+      icon: 'ri-hospital-line',
+    },
+    { name: 'Profile', path: '/user/profile', icon: 'ri-user-3-line' },
+  ];
+
+  const adminMenu = [
+    { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
+    { name: 'Users', path: '/admin/users', icon: 'ri-user-3-line' },
+    { name: 'Doctors', path: '/admin/doctors', icon: 'ri-user-star-line' },
+  ];
+
+  const doctorMenu = [
+    { name: 'Home', path: '/dashboard', icon: 'ri-home-3-line' },
+    {
+      name: 'Appointments',
+      path: '/doctor/appointments',
+      icon: 'ri-file-list-3-line',
+    },
+    {
+      name: 'Profile',
+      path: `/doctor/profile/${user._id}`,
+      icon: 'ri-user-3-line',
+    },
+  ];
 
   const menuToRender = /admin/i.test(user?.role)
     ? adminMenu
@@ -115,7 +121,7 @@ const Dashboard = ({ children }) => {
                 <i className='ri-notification-2-line layout-action-icon px-3'></i>
               </Badge>
 
-              <Link to='/user/profile' className='anchor mx-3'>
+              <Link to={`/user/profile`} className='anchor mx-3'>
                 {user.name}
               </Link>
             </div>

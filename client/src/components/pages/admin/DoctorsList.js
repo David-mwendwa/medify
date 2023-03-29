@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getDoctors, updateDoctor } from '../../redux/actions/userActions';
-import Dashboard from '../pages/Dashboard';
+import { getDoctors, updateDoctor } from '../../../redux/actions/userActions';
+import Dashboard from '../Dashboard';
 
 const DoctorsList = () => {
   const dispatch = useDispatch();

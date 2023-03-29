@@ -2,8 +2,8 @@ import { Table } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUsers } from '../../redux/actions/userActions';
-import Dashboard from '../pages/Dashboard';
+import { getUsers } from '../../../redux/actions/userActions';
+import Dashboard from '../Dashboard';
 
 const UsersList = () => {
   const dispatch = useDispatch();

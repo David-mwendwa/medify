@@ -9,6 +9,7 @@ import errorHandlerMiddleware from './middleware/error-handler.js';
 import notFoundMiddleware from './middleware/not-found.js';
 
 import userRouter from './routes/userRoutes.js';
+import doctorRouter from './routes/doctorRoutes.js';
 
 const app = express();
 dotenv.config();
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 
 // router
 app.use('/api/v1', userRouter);
+app.use('/api/v1', doctorRouter);
 
 // error middlewares
 app.use(errorHandlerMiddleware);
