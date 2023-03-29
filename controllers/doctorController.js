@@ -17,6 +17,12 @@ export const updateDoctor = async (req, res) => {
   });
 };
 
+export const getDoctorInfo = async (req, res) => {
+  console.log(req.params);
+  const doctor = await Doctor.findOne({ userId: req.params.userId });
+  res.status(200).json({ success: true, data: doctor });
+};
+
 export const getDoctors = getMany(Doctor);
 
 export const getDoctor = getOne(Doctor);

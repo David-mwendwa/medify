@@ -2,11 +2,14 @@ import express from 'express';
 import {
   deleteDoctor,
   getDoctor,
+  getDoctorInfo,
   getDoctors,
   updateDoctor,
 } from '../controllers/doctorController.js';
 import { authorizeRoles, protect } from '../middleware/auth.js';
 const router = express.Router();
+
+router.route('/doctor/profile/:userId').get(protect, getDoctorInfo);
 
 router
   .route('/admin/doctors')
