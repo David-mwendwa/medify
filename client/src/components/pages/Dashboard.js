@@ -72,13 +72,22 @@ const Dashboard = ({ children }) => {
     ? doctorMenu
     : userMenu;
 
+  const role = /admin/i.test(user?.role)
+    ? 'Admin'
+    : /doctor/i.test(user?.role)
+    ? 'Doctor'
+    : 'User';
+
   return (
     <div className='main p-2'>
       <div className='d-flex layout'>
         <div className='sidebar'>
           <div className='sidebar-header'>
             {!collapsed ? (
-              <h1>MEDIFY</h1>
+              <>
+                <h1>MEDIFY</h1>
+                <small className='text-light'>{role}</small>
+              </>
             ) : (
               <i
                 class='ri-menu-2-line menu-icon'

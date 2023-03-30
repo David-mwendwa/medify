@@ -9,6 +9,7 @@ import { toast } from 'react-hot-toast';
 import Dashboard from '../Dashboard';
 import DoctorForm from './DoctorForm';
 import { useNavigate, useParams } from 'react-router-dom';
+import moment from 'moment';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -24,9 +25,19 @@ const Profile = () => {
     } else dispatch(getDoctorInfo(userId));
   }, [dispatch, doctor, userId]);
 
+  //TODO: timings don't display on the form
   const handleSubmit = (values) => {
     console.log({ values });
-    dispatch(updateDoctorProfile(userId, values));
+    let updateInfo = {
+      ...values,
+      userId,
+      timings: [
+        moment(values?.timings[0].format('HH:mm')),
+        moment(values?.timings[1].format('HH:mm')),
+      ],
+    };
+    console.log({ userId, updateInfo });
+    dispatch(updateDoctorProfile(userId, updateInfo));
     toast.success('updated submitted');
     setTimeout(() => {
       navigate('/dashboard');

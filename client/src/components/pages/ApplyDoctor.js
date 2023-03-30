@@ -5,12 +5,20 @@ import Dashboard from './Dashboard';
 import { applyDoctor } from '../../redux/actions/userActions';
 import { toast } from 'react-hot-toast';
 import DoctorForm from './doctor/DoctorForm';
+import moment from 'moment';
 
 const ApplyDoctor = () => {
   const dispatch = useDispatch();
   const { loading, user, error } = useSelector((state) => state.user);
   const handleSubmit = (values) => {
-    dispatch(applyDoctor(values));
+    let doctorInfo = {
+      ...values,
+      timings: [
+        moment(values.timings[0].format('HH:mm')),
+        moment(values.timings[1].format('HH:mm')),
+      ],
+    };
+    dispatch(applyDoctor(doctorInfo));
     toast.success('Doctor application submitted');
   };
 
