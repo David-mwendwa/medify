@@ -6,8 +6,6 @@ import toast from 'react-hot-toast';
 import { logout } from '../../redux/actions/userActions';
 import ApplyDoctor from './ApplyDoctor';
 
-
-
 const Dashboard = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
@@ -89,6 +87,7 @@ const Dashboard = ({ children }) => {
             <div className='menu'>
               {menuToRender.map((menu) => (
                 <div
+                  key={menu.name}
                   className={`d-flex menu-item ${
                     isActive(menu.path) ? 'active-menu-item' : ''
                   }`}>

@@ -22,9 +22,9 @@ const Protected = ({ children }) => {
   if (token) {
     const tokenExpired = checkTokenExpiration(token);
     isAuthorized = tokenExpired ? false : true;
+    console.log('PROTECTED ROUTE', { token, tokenExpired, isAuthorized });
   } else isAuthorized = !!user?.name;
 
-  console.log('PROTECTED', { user, isAuthorized });
   if (isAuthorized) {
     return children;
   }

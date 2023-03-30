@@ -27,6 +27,9 @@ import {
   USERS_FAIL,
   CLEAR_ERRORS,
   USER_RESET,
+  DOCTOR_PROFILE_REQUEST,
+  DOCTOR_PROFILE_SUCCESS,
+  DOCTOR_PROFILE_FAIL,
   DOCTOR_UPDATE_REQUEST,
   DOCTOR_UPDATE_SUCCESS,
   DOCTOR_UPDATE_FAIL,
@@ -117,14 +120,22 @@ export const usersReducer = (state = { users: [] }, action) => {
 
 export const doctorReducer = (state = { doctor: {} }, action) => {
   switch (action.type) {
+    case DOCTOR_PROFILE_REQUEST:
     case DOCTOR_DETAILS_REQUEST:
     case DOCTOR_UPDATE_REQUEST:
     case DOCTOR_DELETE_REQUEST:
       return { loading: true };
-    case DOCTOR_DETAILS_SUCCESS:
+
     case DOCTOR_UPDATE_SUCCESS:
+      return { loading: false, updated: true };
+
     case DOCTOR_DELETE_SUCCESS:
+      return { loading: false, deleted: true };
+
+    case DOCTOR_PROFILE_SUCCESS:
+    case DOCTOR_DETAILS_SUCCESS:
       return { loading: false, success: true, doctor: action.payload };
+    case DOCTOR_PROFILE_FAIL:
     case DOCTOR_DETAILS_FAIL:
     case DOCTOR_UPDATE_FAIL:
     case DOCTOR_DELETE_FAIL:

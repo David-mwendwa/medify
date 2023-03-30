@@ -5,11 +5,15 @@ import {
   getDoctorInfo,
   getDoctors,
   updateDoctor,
+  updateDoctorProfile,
 } from '../controllers/doctorController.js';
 import { authorizeRoles, protect } from '../middleware/auth.js';
 const router = express.Router();
 
-router.route('/doctor/profile/:userId').get(protect, getDoctorInfo);
+router
+  .route('/doctor/profile/:userId')
+  .get(protect, getDoctorInfo)
+  .patch(protect, updateDoctorProfile);
 
 router
   .route('/admin/doctors')

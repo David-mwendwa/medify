@@ -31,6 +31,9 @@ import {
   USERS_REQUEST,
   USERS_SUCCESS,
   USERS_FAIL,
+  DOCTOR_PROFILE_REQUEST,
+  DOCTOR_PROFILE_SUCCESS,
+  DOCTOR_PROFILE_FAIL,
   DOCTOR_UPDATE_REQUEST,
   DOCTOR_UPDATE_SUCCESS,
   DOCTOR_UPDATE_FAIL,
@@ -249,6 +252,34 @@ export const deleteUser = (id) => async (dispatch) => {
 };
 
 /******* DOCTOR ACTIONS **************/
+export const getDoctorInfo = (userId) => async (dispatch) => {
+  dispatch({ type: DOCTOR_PROFILE_REQUEST });
+
+  try {
+    const { data } = await axios.get(`/api/v1/doctor/profile/${userId}`);
+    dispatch({ type: DOCTOR_PROFILE_SUCCESS, payload: data.data });
+  } catch (error) {
+    dispatch({
+      type: DOCTOR_PROFILE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const updateDoctorProfile = (userId, updateInfo) => async (dispatch) => {
+  dispatch({ type: DOCTOR_UPDATE_REQUEST });
+
+  try {
+    await axios.patch(`/api/v1/doctor/profile/${userId}`, updateInfo);
+    dispatch({ type: DOCTOR_UPDATE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: DOCTOR_UPDATE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const getDoctors = () => async (dispatch) => {
   dispatch({ type: DOCTORS_REQUEST });
 
